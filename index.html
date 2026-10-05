@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AURA — Autonomous Universal Reasoning Assistant</title>
+
+    <link rel="stylesheet" href="/frontend/style.css?v=10">
+</head>
+
+<body>
+
+<!-- =====================================================
+     LOGIN / REGISTER
+     ===================================================== -->
+
+<div id="loginPage" class="auth-page hidden">
+
+    <div class="auth-card">
+
+        <div class="brand-large">
+
+            <div class="brand-icon">
+                ✦
+            </div>
+
+            <div>
+                <h1>AURA</h1>
+                <p>Autonomous Universal Reasoning Assistant</p>
+            </div>
+
+        </div>
+
+
+        <div class="auth-tabs">
+
+            <button id="loginTab"
+                    class="auth-tab selected">
+                Login
+            </button>
+
+            <button id="registerTab"
+                    class="auth-tab">
+                Register
+            </button>
+
+        </div>
+
+
+        <div class="auth-form">
+
+            <input
+                id="name"
+                class="hidden"
+                type="text"
+                placeholder="Your name"
+            >
+
+            <input
+                id="email"
+                type="email"
+                placeholder="Email address"
+            >
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Password"
+            >
+
+            <button
+                id="authBtn"
+                class="primary"
+            >
+                Login
+            </button>
+
+            <div
+                id="authMsg"
+                class="auth-message"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     APPLICATION
+     ===================================================== -->
+
+<div class="app-shell">
+
+
+    <!-- =================================================
+         SIDEBAR
+         ================================================= -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <!-- BRAND -->
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    ✦
+                </div>
+
+                <div>
+
+                    <div class="brand-title">
+                        AURA
+                    </div>
+
+                    <div class="brand-subtitle">
+                        AI OPERATING SYSTEM
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="navigation">
+
+                <button
+                    class="nav active"
+                    data-page="chat"
+                >
+
+                    <span class="nav-icon">
+                        💬
+                    </span>
+
+                    <span>
+                        Chat
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="nav"
+                    data-page="knowledge"
+                >
+
+                    <span class="nav-icon">
+                        📚
+                    </span>
+
+                    <span>
+                        Knowledge
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="nav"
+                    data-page="memory"
+                >
+
+                    <span class="nav-icon">
+                        🧠
+                    </span>
+
+                    <span>
+                        Memory
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="nav"
+                    data-page="planner"
+                >
+
+                    <span class="nav-icon">
+                        ✅
+                    </span>
+
+                    <span>
+                        Planner
+                    </span>
+
+                </button>
+
+            </nav>
+
+        </div>
+
+
+        <!-- SIDEBAR BOTTOM -->
+
+        <div class="sidebar-bottom">
+
+            <div
+                id="userBox"
+                class="user-box"
+            >
+                User
+            </div>
+
+            <button
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                ↪ Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =================================================
+         MAIN CONTENT
+         ================================================= -->
+
+    <main class="main-content">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h2 id="pageTitle">
+                    AURA Chat
+                </h2>
+
+                <div class="tagline">
+                    Think • Learn • Remember • Collaborate • Act
+                </div>
+
+            </div>
+
+
+            <div class="aura-status">
+
+                <span class="status-dot"></span>
+
+                AURA Online
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             CHAT PAGE
+             ================================================= -->
+
+        <section
+            id="chatPage"
+            class="page"
+        >
+
+            <div class="chat-layout">
+
+
+                <!-- CHAT TOOLBAR -->
+
+                <div class="chat-toolbar">
+
+                    <div class="agent-area">
+
+                        <label for="agent">
+                            Agent
+                        </label>
+
+                        <select id="agent">
+
+                            <option value="general">
+                                General
+                            </option>
+
+                            <option value="study">
+                                Study Agent
+                            </option>
+
+                            <option value="coding">
+                                Coding Agent
+                            </option>
+
+                            <option value="research">
+                                Research Agent
+                            </option>
+
+                            <option value="career">
+                                Career Agent
+                            </option>
+
+                            <option value="productivity">
+                                Productivity Agent
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        id="newChat"
+                        class="secondary"
+                    >
+                        + New Chat
+                    </button>
+
+                </div>
+
+
+
+                <!-- CURRENT AGENT -->
+
+                <div class="current-agent-card">
+
+                    <div
+                        id="currentAgentIcon"
+                        class="current-agent-icon"
+                    >
+                        ✦
+                    </div>
+
+                    <div>
+
+                        <div class="current-agent-label">
+                            Selected Agent
+                        </div>
+
+                        <div
+                            id="currentAgentName"
+                            class="current-agent-name"
+                        >
+                            General Agent
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MESSAGES -->
+
+                <div
+                    id="messages"
+                    class="messages"
+                >
+
+                    <div class="welcome-message">
+
+                        <div class="welcome-icon">
+                            ✦
+                        </div>
+
+                        <h1>
+                            Welcome to AURA
+                        </h1>
+
+                        <p>
+                            Your Autonomous Universal Reasoning Assistant.
+                        </p>
+
+                        <div class="welcome-features">
+
+                            <span>🧠 Memory</span>
+                            <span>📚 Study</span>
+                            <span>💻 Coding</span>
+                            <span>🔎 Research</span>
+                            <span>💼 Career</span>
+                            <span>📅 Planning</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CHAT INPUT -->
+
+                <div class="chat-input-area">
+
+                    <div class="input-row">
+
+
+                        <button
+                            id="micBtn"
+                            class="icon-button"
+                            title="Voice input"
+                        >
+                            🎙
+                        </button>
+
+
+                        <textarea
+                            id="prompt"
+                            placeholder="Ask AURA anything..."
+                            rows="1"
+                        ></textarea>
+
+
+                        <button
+                            id="sendBtn"
+                            class="send-button"
+                        >
+                            Send
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="status"
+                        class="status"
+                    >
+                        Ready
+                    </div>
+
+                </div>
+
+
+                <div class="chat-tip">
+                    Tip: Use Research Agent for current information and Knowledge for your PDFs.
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             KNOWLEDGE PAGE
+             ================================================= -->
+
+        <section
+            id="knowledgePage"
+            class="page hidden"
+        >
+
+            <div class="page-card">
+
+                <div class="page-card-header">
+
+                    <h2>
+                        Knowledge Base
+                    </h2>
+
+                    <p>
+                        Upload PDFs and ask AURA questions about them.
+                    </p>
+
+                </div>
+
+
+                <div class="knowledge-upload">
+
+                    <label for="pdfFile">
+                        📄 Choose PDF
+                    </label>
+
+                    <input
+                        id="pdfFile"
+                        type="file"
+                        accept=".pdf"
+                    >
+
+                    <button
+                        id="uploadBtn"
+                        class="primary"
+                    >
+                        Upload & Index
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="uploadMsg"
+                    class="status"
+                ></div>
+
+
+                <hr>
+
+
+                <div class="document-query">
+
+                    <h3>
+                        Ask your documents
+                    </h3>
+
+                    <textarea
+                        id="docQuery"
+                        rows="4"
+                        placeholder="Ask something about your uploaded PDF..."
+                    ></textarea>
+
+                    <button
+                        id="docAskBtn"
+                        class="primary"
+                    >
+                        Search Knowledge
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="docResults"
+                    class="doc-results"
+                >
+                    No search performed yet.
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MEMORY PAGE
+             ================================================= -->
+
+        <section
+            id="memoryPage"
+            class="page hidden"
+        >
+
+            <div class="page-card">
+
+                <div class="page-card-header">
+
+                    <h2>
+                        Long-term Memory
+                    </h2>
+
+                    <p>
+                        Information that AURA remembers for future conversations.
+                    </p>
+
+                </div>
+
+
+                <div class="memory-input-area">
+
+                    <input
+                        id="memoryInput"
+                        type="text"
+                        placeholder="Add something AURA should remember..."
+                    >
+
+                    <button
+                        id="memoryAdd"
+                        class="primary"
+                    >
+                        + Add Memory
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="memoryList"
+                    class="memory-list"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PLANNER PAGE
+             ================================================= -->
+
+        <section
+            id="plannerPage"
+            class="page hidden"
+        >
+
+            <div class="page-card">
+
+                <div class="page-card-header">
+
+                    <h2>
+                        Planner
+                    </h2>
+
+                    <p>
+                        Organize tasks, deadlines and priorities.
+                    </p>
+
+                </div>
+
+
+                <div class="task-form">
+
+                    <input
+                        id="taskTitle"
+                        type="text"
+                        placeholder="Task title"
+                    >
+
+                    <textarea
+                        id="taskDescription"
+                        rows="3"
+                        placeholder="Task description"
+                    ></textarea>
+
+
+                    <div class="task-row">
+
+                        <input
+                            id="taskDue"
+                            type="date"
+                        >
+
+                        <select id="taskPriority">
+
+                            <option value="low">
+                                Low Priority
+                            </option>
+
+                            <option
+                                value="medium"
+                                selected
+                            >
+                                Medium Priority
+                            </option>
+
+                            <option value="high">
+                                High Priority
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            id="taskAdd"
+                            class="primary"
+                        >
+                            + Add Task
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="taskList"
+                    class="task-list"
+                ></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="/frontend/app.js?v=10"></script>
+
+</body>
+
+</html>
